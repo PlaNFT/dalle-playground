@@ -109,6 +109,8 @@ class DalleModel:
             decoded_images = p_decode(self.vqgan, encoded_images, self.vqgan_params)
             decoded_images = decoded_images.clip(0.0, 1.0).reshape((-1, 256, 256, 3))
             for img in decoded_images:
-                images.append(Image.fromarray(np.asarray(img * 255, dtype=np.uint8)).resize((512, 512)))
+                img = Image.fromarray(np.asarray(img * 255, dtype=np.uint8))
+                img = img.resize((512,512))
+                images.append(img)
 
         return images
